@@ -1,0 +1,1 @@
+# Planejamento – Arquivos de tarefas, sprints e organização

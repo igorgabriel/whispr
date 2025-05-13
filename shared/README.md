@@ -1,0 +1,1 @@
+# Shared – Tipos e arquivos compartilhados
