@@ -2,6 +2,7 @@ from fastapi import APIRouter, Query
 from app.models.confession_schema import Confession, ConfessionList, ConfessionRequest, ConfessionResponse
 from app.models.schema import Emotion, Language
 from app.utils.constants import RISK_WORDS
+from app.services.ai import get_ai_response, get_emotion_from_text
 from datetime import datetime, timedelta
 
 router = APIRouter()
@@ -21,31 +22,20 @@ and returns a simulated empathetic response, the predominant emotion, and whethe
 - `language` must be either `"en"` or `"pt"`.
 """
 )
-def handle_confession(data: ConfessionRequest):
+async def handle_confession(data: ConfessionRequest):
     text = data.text.lower()
     lang = data.language.value
 
     risk = any(word in text for word in RISK_WORDS[lang])
 
-    if lang == Language.PT:
-        reply = (
-            "Sinto muito que você esteja se sentindo assim. Estou aqui com você."
-            if risk else "Obrigado por confiar em mim. Você pode desabafar sempre que quiser."
-        )
-    else:
-        reply = (
-            "I'm really sorry you're feeling this way. I'm here with you."
-            if risk else "Thank you for trusting me. You can always share your thoughts here."
-        )
-
-    # Mock emotion detection
-    emotion = Emotion.SADNESS if risk else Emotion.CALM
+    emotion = await get_emotion_from_text(text, language=lang)
+    reply = await get_ai_response(text, language=lang, risk=risk)
     
-    zk_proof = None
-    if risk:
-        zk_proof = f"zk-proof-mod-safe-{text[:6].replace(' ', '')}"
+    # zk_proof = None
+    # if risk:
+    #     zk_proof = f"zk-proof-mod-safe-{text[:6].replace(' ', '')}"
 
-    return ConfessionResponse(reply=reply, emotion=emotion, risk=risk, zk_moderation_proof=zk_proof)
+    return ConfessionResponse(reply=reply, emotion=emotion, risk=risk)
 
 @router.get(
     "",

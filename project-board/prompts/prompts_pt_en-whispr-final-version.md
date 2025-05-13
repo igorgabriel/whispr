@@ -38,6 +38,15 @@ Desabafo do usuário:
 
 ---
 
+### 😔 Prompt Identificar emoção
+
+```
+Analise o desabafo a seguir e retorne apenas a emoção predominante, sem explicações.
+As opções possíveis são: {lista de emoções}
+```
+
+---
+
 ## 🇺🇸 English
 
 ### 🧠 Base Prompt
@@ -68,4 +77,13 @@ Encourage the user to seek help, and emphasize they are not alone.
 
 User's message:
 "{user's text here}"
+```
+
+---
+
+### 😔 Emotion Prompt
+
+```
+Analyze the confession below and return only the predominant emotion, with no explanation.
+The possible options are: {emotion list}
 ```

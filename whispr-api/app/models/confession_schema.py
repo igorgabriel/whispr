@@ -10,7 +10,7 @@ class ConfessionRequest(BaseModel):
 
 class ConfessionResponse(BaseModel):
     reply: str
-    emotion: Emotion
+    emotion: str
     risk: bool
     zk_moderation_proof: Optional[str] = None
     
