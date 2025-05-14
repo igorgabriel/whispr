@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home_view.dart';
+import 'login_view.dart';
 
 class SplashScreenView extends StatefulWidget {
   const SplashScreenView({super.key});
@@ -16,7 +17,7 @@ void gotoLogin(BuildContext context) {
     context,
     PageRouteBuilder(
       transitionDuration: const Duration(seconds: 2),
-      pageBuilder: (_, __, ___) => const HomeView(),
+      pageBuilder: (_, __, ___) => const LoginView(),
     ),
   );
 }

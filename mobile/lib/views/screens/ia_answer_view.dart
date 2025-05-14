@@ -6,7 +6,7 @@ import 'how_do_you_feel_view.dart';
 
 class IAAnswerView extends StatefulWidget {
   const IAAnswerView({super.key});
-  static const String route = '/HIAAnswer';
+  static const String route = '/IAAnswer';
 
   @override
   HIAAnswerViewState createState() => HIAAnswerViewState();

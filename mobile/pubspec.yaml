@@ -36,6 +36,10 @@ dependencies:
 
   # network
   dio: ^5.8.0+1
+  http: ^1.4.0
+
+  # web3
+  web3dart: ^3.0.0
 
   # utils
   dartz: ^0.10.1
