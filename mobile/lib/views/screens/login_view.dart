@@ -23,7 +23,8 @@ class LoginViewState extends State<LoginView> {
   }
 
   Future<void> connectWallet() async {
-    var apiUrl = "http://192.168.15.49:8545";
+    var apiUrl =
+        "https://9dcf-2804-7f3-480-958c-4b67-6f12-2bd5-5629.ngrok-free.app";
 
     var httpClient = Client();
     var ethClient = Web3Client(apiUrl, httpClient);
