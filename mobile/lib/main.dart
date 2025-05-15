@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'routes/routes.dart';
-import 'viewmodels/view_model.dart';
+import 'viewmodels/how_do_you_feel_view_model.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   // await initSingletons();
 
@@ -18,7 +20,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ViewModel())],
+      providers: [ChangeNotifierProvider(create: (_) => HomeViewModel())],
       child: MaterialApp(
         title: 'Whispr',
         debugShowCheckedModeBanner: false,
