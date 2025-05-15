@@ -1,35 +1,28 @@
 import 'package:flutter/foundation.dart';
 
+import '../models/replyAI.dart';
 import '../services/how_do_you_feel_service.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class HowDoYouFeelViewModel extends ChangeNotifier {
   final HowDoYouFeelService _service = HowDoYouFeelService();
-  // List<Empresa> _empresas = [];
+  ReplyAI _replyAI = ReplyAI.copyWith(reply: '', emotion: '', risk: false);
   bool _loading = false;
 
-  // List<Empresa> get empresas => _empresas;
+  ReplyAI get replyAI => _replyAI;
   bool get loading => _loading;
 
-  Future<void> fetchEmpresas(
-    String chave,
-    double? latitude,
-    double? longitude,
-    int offset,
-  ) async {
-    if (offset == 0) _loading = true;
-    Future.delayed(Duration.zero, () async {
-      notifyListeners();
-    });
+  Future<void> post(String texto) async {
+    _loading = true;
+    notifyListeners();
 
-    final result = await _service.fetch();
+    var result = await _service.post(texto);
+
     result.fold(
       (error) {
-        // _empresas = [];
+        _replyAI = ReplyAI.copyWith(reply: '', emotion: '', risk: false);
       },
       (response) {
-        // for (var empresa in response.results) {
-        //   _empresas.add(Empresa.fromJson(empresa));
-        // }
+        _replyAI = response.data;
       },
     );
 
