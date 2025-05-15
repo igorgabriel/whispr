@@ -39,7 +39,7 @@ dependencies:
   http: ^1.4.0
 
   # web3
-  web3dart: ^3.0.0
+  web3dart: ^2.7.3
 
   # utils
   dartz: ^0.10.1

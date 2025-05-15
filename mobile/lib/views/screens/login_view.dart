@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
-// ignore: depend_on_referenced_packages
-import 'package:wallet/wallet.dart';
 import 'package:web3dart/web3dart.dart';
 
 import 'home_view.dart';
