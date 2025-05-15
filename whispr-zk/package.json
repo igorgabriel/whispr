@@ -7,14 +7,21 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build-merkle": "ts-node src/zk/build-badges-markle-tree.ts"
   },
   "dependencies": {
+    "@zk-kit/imt": "^2.0.0-beta.8",
+    "@zk-kit/incremental-merkle-tree": "^1.1.0",
     "axios": "^1.9.0",
+    "buffer": "^6.0.3",
+    "circomlibjs": "^0.1.7",
     "dotenv": "^16.5.0",
+    "ethers": "^6.14.0",
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/circomlibjs": "^0.1.6",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.17",
     "ts-node-dev": "^2.0.0",

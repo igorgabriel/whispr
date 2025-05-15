@@ -65,6 +65,21 @@ whispr-zk/
 
 ---
 
+## Badges
+
+| Badge ID | Nome da Badge | Critério de Conquista |
+| -------- | ------------- | --------------------- |
+| whispr_badge:first_confession |	Primeira Confissão |	Enviou o primeiro desabafo no app |
+| whispr_badge:daily_streak_3 |	Três Dias Seguidos |	Usou o app por 3 dias consecutivos |
+| whispr_badge:daily_streak_7 |	Sete Dias Seguidos |	Usou o app por 7 dias consecutivos |
+| whispr_badge:confess_5	| Desabafou 5 vezes |	Enviou 5 confissões no total |
+| whispr_badge:confess_10	| Desabafou 10 vezes |	Enviou 10 confissões no total |
+| whispr_badge:night_session |	Confissão Noturna |	Enviou uma confissão entre 0h e 5h |
+| whispr_badge:opened_7_days |	Consistência Semanal |	Abriu o app pelo menos 1x em 7 dias diferentes |
+| whispr_badge:long_text |	Texto Profundo |	Enviou uma confissão com mais de 300 caracteres |
+| whispr_badge:calm_after_risk |	Renasceu Calmo |	Confessou risco e depois teve uma emoção “calma” |
+| whispr_badge:early_user |	Usuário Pioneiro |	Usou o app no período de lançamento (beta) |
+
 ## 🔮 Próximos passos
 
 - Criar o circuito `merkle_badge.nr` com verificação Merkle
