@@ -46,11 +46,11 @@ class LoginViewState extends State<LoginView> {
     var address = credentials.address;
     walletAddress.value = address.hex;
 
-    EtherAmount balanceEth = await ethClient.getBalance(address);
+    // EtherAmount balanceEth = await ethClient.getBalance(address);
 
-    balance.value = balanceEth
-        .getValueInUnit(EtherUnit.ether)
-        .toStringAsFixed(2);
+    // balance.value = balanceEth
+    //     .getValueInUnit(EtherUnit.ether)
+    //     .toStringAsFixed(2);
 
     buttonText.value = 'Continuar';
   }
