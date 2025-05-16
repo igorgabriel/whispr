@@ -13,6 +13,7 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
 
   DioNetworkService() {
     dio = Dio();
+    dio.options = dioBaseOptions;
     if (kDebugMode) {
       dio.interceptors.add(
         LogInterceptor(requestBody: true, responseBody: true),
@@ -30,7 +31,7 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   @override
   String get baseUrl =>
       dotenv.env[NetworkEnv.BASEURL.name] ??
-      'https://whispr-api.herokuapp.com/';
+      'https://whispr-a22j.onrender.com/';
 
   @override
   String get apiKey => dotenv.env[NetworkEnv.APIKEY.name] ?? '';

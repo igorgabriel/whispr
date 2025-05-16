@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../models/replyAI.dart';
 import '../views/screens/diary_view.dart';
 import '../views/screens/how_do_you_feel_view.dart';
-import '../views/screens/ia_answer_view.dart';
+import '../views/screens/ai_answer_view.dart';
 import '../views/screens/login_view.dart';
 import '../views/screens/splashscreen_view.dart';
 
@@ -24,10 +25,16 @@ class AppRouter {
           settings: const RouteSettings(name: HowDoYouFeelView.route),
           builder: (_) => const HowDoYouFeelView(),
         );
-      case IAAnswerView.route:
+      case AIAnswerView.route:
         return MaterialPageRoute(
-          settings: const RouteSettings(name: IAAnswerView.route),
-          builder: (_) => const IAAnswerView(),
+          settings: const RouteSettings(name: AIAnswerView.route),
+          builder: (_) {
+            List<dynamic> args = settings.arguments as List<dynamic>;
+            return AIAnswerView(
+              question: args[0] as String,
+              replyAI: args[1] as ReplyAI,
+            );
+          },
         );
       case DiaryView.route:
         return MaterialPageRoute(

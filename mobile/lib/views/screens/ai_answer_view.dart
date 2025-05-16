@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/replyAI.dart';
 import 'diary_view.dart';
 import 'how_do_you_feel_view.dart';
 
-class IAAnswerView extends StatefulWidget {
-  const IAAnswerView({super.key});
-  static const String route = '/IAAnswer';
+class AIAnswerView extends StatefulWidget {
+  final String question;
+  final ReplyAI replyAI;
+
+  const AIAnswerView({
+    super.key,
+    required this.question,
+    required this.replyAI,
+  });
+  static const String route = '/AIAnswer';
 
   @override
-  HIAAnswerViewState createState() => HIAAnswerViewState();
+  AIAnswerViewState createState() => AIAnswerViewState();
 }
 
-class HIAAnswerViewState extends State<IAAnswerView> {
+class AIAnswerViewState extends State<AIAnswerView> {
   Future<void> nextScreenDiary() async {
     if (mounted) {
       Navigator.push(
@@ -88,15 +96,10 @@ class HIAAnswerViewState extends State<IAAnswerView> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      ChatBubble(
-                        message:
-                            "Acordei com uma ansiedade horrível, parece que vai dar tudo errado.",
-                        isSender: true,
-                      ),
+                      ChatBubble(message: widget.question, isSender: true),
                       SizedBox(height: 10),
                       ChatBubble(
-                        message:
-                            "Imagino o peso que deve ser abrir os olhos e já sentir essa onda tomando conta...",
+                        message: widget.replyAI.reply,
                         isSender: false,
                       ),
 
