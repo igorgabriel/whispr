@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../data/app_exception.dart';
 import '../data/remote/network/network_service.dart';
@@ -41,6 +43,16 @@ class HowDoYouFeelService {
           ),
         );
       }
+
+      // save the response to the database
+      Future.microtask(() async {
+        final dbPath = await getDatabasesPath();
+        final db = await openDatabase(join(dbPath, 'whispr-db.db'));
+        await db.rawInsert(
+          'INSERT INTO desabafos(timestamp, text, ia_answer) VALUES("${DateTime.now().toIso8601String()}", "$text", "$jsonData")',
+        );
+        db.close();
+      });
 
       final response = ReplyAI.fromJson(jsonData);
       return Right(

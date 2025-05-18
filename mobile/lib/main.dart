@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'data/local/sqflite/initDb.dart';
 import 'di/injector.dart';
 import 'routes/routes.dart';
 import 'viewmodels/how_do_you_feel_view_model.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await initSingletons();
+  await initDb();
 
   runApp(App());
 }

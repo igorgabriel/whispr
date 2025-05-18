@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'how_do_you_feel_view.dart';
 import 'shared/bottom_navigation_widget.dart';
@@ -15,62 +17,13 @@ class WhispyView extends StatefulWidget {
 }
 
 class WhispyViewState extends State<WhispyView> {
-  final whispyBadges = [
-    {
-      "id": 1,
-      "name": "Primeira Confissão",
-      "description": "Enviou o primeiro desabafo no app",
-    },
-    {
-      "id": 2,
-      "name": "Três Dias Seguidos",
-      "description": "Usou o app por 3 dias consecutivos",
-    },
-    {
-      "id": 3,
-      "name": "Sete Dias Seguidos",
-      "description": "Usou o app por 7 dias consecutivos",
-    },
-    {
-      "id": 4,
-      "name": "Desabafou 5 vezes",
-      "description": "Enviou 5 confissões no total",
-    },
-    {
-      "id": 5,
-      "name": "Desabafou 10 vezes",
-      "description": "Enviou 10 confissões no total",
-    },
-    {
-      "id": 6,
-      "name": "Confissão Noturna",
-      "description": "Enviou uma confissão entre 0h e 5h",
-    },
-    {
-      "id": 7,
-      "name": "Consistência Semanal",
-      "description": "Abrir o app pelo menos 1x em 7 dias diferentes",
-    },
-    {
-      "id": 8,
-      "name": "Texto Profundo",
-      "description": "Enviou uma confissão com mais de 300 caracteres",
-    },
-    {
-      "id": 9,
-      "name": "Renasceu Calmo",
-      "description": "Confessou risco e depois teve uma emoção 'calma'",
-    },
-    {
-      "id": 10,
-      "name": "Usuário Pioneiro",
-      "description": "Usou o app no período de lançamento (beta)",
-    },
-  ];
+  List<Map<String, Object?>> whispyBadges = [];
+  List<Map<String, Object?>> showBadges = [];
+
   Future<void> nextScreen() async {
     if (mounted) {
       Navigator.push(
-        context,
+        this.context,
         PageRouteBuilder(
           transitionDuration: const Duration(seconds: 2),
           pageBuilder: (_, __, ___) => const WhispyView(),
@@ -82,7 +35,7 @@ class WhispyViewState extends State<WhispyView> {
   Future<void> gotoHowDoYouFeel() async {
     if (mounted) {
       Navigator.push(
-        context,
+        this.context,
         PageRouteBuilder(
           transitionDuration: const Duration(seconds: 2),
           pageBuilder: (_, __, ___) => const HowDoYouFeelView(),
@@ -91,8 +44,36 @@ class WhispyViewState extends State<WhispyView> {
     }
   }
 
+  Future<void> getBadges() async {
+    final dbPath = await getDatabasesPath();
+    final db = await openDatabase(join(dbPath, 'whispr-db.db'));
+
+    whispyBadges = await db.query('badges');
+    var numberDesabafos = (await db.query('desabafos')).length;
+
+    if (numberDesabafos >= 1) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 1).first);
+    }
+
+    if (numberDesabafos >= 5) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 4).first);
+    }
+
+    if (numberDesabafos >= 10) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 5).first);
+    }
+
+    setState(() {});
+
+    db.close();
+  }
+
   @override
   void initState() {
+    Future.microtask(() async {
+      await getBadges();
+    });
+
     super.initState();
   }
 
@@ -183,7 +164,7 @@ class WhispyViewState extends State<WhispyView> {
                                 height: 110,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: whispyBadges.length,
+                                  itemCount: showBadges.length,
                                   itemBuilder: (item, index) {
                                     return SizedBox(
                                       width: 150,
@@ -211,7 +192,7 @@ class WhispyViewState extends State<WhispyView> {
                                                   SizedBox(width: 10),
                                                   Expanded(
                                                     child: Text(
-                                                      whispyBadges[index]["name"]!
+                                                      showBadges[index]["name"]!
                                                           .toString(),
                                                       textAlign: TextAlign.left,
                                                       style:
@@ -227,7 +208,7 @@ class WhispyViewState extends State<WhispyView> {
                                               ),
                                               SizedBox(height: 10),
                                               Text(
-                                                whispyBadges[index]["description"]!
+                                                showBadges[index]["description"]!
                                                     .toString(),
                                                 textAlign: TextAlign.left,
                                                 maxLines: 2,
