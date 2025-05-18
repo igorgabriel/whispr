@@ -103,8 +103,7 @@ Executar os seguintes comandos dentro da pasta **circuits/**:
 nargo compile
 nargo test
 nargo execute
-bb prove -b ./target/circuits.json -w ./target/circuits.gz -o ./target
-bb write_vk -b ./target/circuits.json -o ./target 
+
 ```
 Executar o seguintes comandos na raiz do projeto (**whispr-zk**)
 ```
