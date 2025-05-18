@@ -35,22 +35,22 @@ class LoginViewState extends State<LoginView> {
 
     buttonText.value = 'Conectando...';
 
-    var blockchainAddress =
-        dotenv.env[NetworkEnv.BLOCKCHAINURL.name] ??
-        'https://9dcf-2804-7f3-480-958c-4b67-6f12-2bd5-5629.ngrok-free.app';
+    // var blockchainAddress =
+    //     dotenv.env[NetworkEnv.BLOCKCHAINURL.name] ??
+    //     'https://9dcf-2804-7f3-480-958c-4b67-6f12-2bd5-5629.ngrok-free.app';
 
-    var httpClient = Client();
-    var ethClient = Web3Client(blockchainAddress, httpClient);
+    // var httpClient = Client();
+    // var ethClient = Web3Client(blockchainAddress, httpClient);
 
-    var credentials = EthPrivateKey.fromHex(textController.text);
-    var address = credentials.address;
-    walletAddress.value = address.hex;
+    // var credentials = EthPrivateKey.fromHex(textController.text);
+    // var address = credentials.address;
+    // walletAddress.value = address.hex;
 
-    EtherAmount balanceEth = await ethClient.getBalance(address);
+    // EtherAmount balanceEth = await ethClient.getBalance(address);
 
-    balance.value = balanceEth
-        .getValueInUnit(EtherUnit.ether)
-        .toStringAsFixed(2);
+    // balance.value = balanceEth
+    //     .getValueInUnit(EtherUnit.ether)
+    //     .toStringAsFixed(2);
 
     buttonText.value = 'Continuar';
   }
