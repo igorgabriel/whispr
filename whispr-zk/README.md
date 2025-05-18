@@ -95,3 +95,20 @@ whispr-zk/
 - **Merkle Tree**: estrutura para provar inclusão de dados
 - **Zero-Knowledge Proofs**: prova de conhecimento sem revelar o conteúdo
 - **Noir + Barretenberg**: ecossistema de circuitos ZK com suporte ao zkVerify
+
+
+## Comandos para o circuito em noir
+Executar os seguintes comandos dentro da pasta **circuits/**:
+```
+nargo compile
+nargo test
+nargo execute
+bb prove -b ./target/circuits.json -w ./target/circuits.gz -o ./target
+bb write_vk -b ./target/circuits.json -o ./target 
+```
+Executar o seguintes comandos na raiz do projeto (**whispr-zk**)
+```
+yarn build-merkle
+yarn gen-ultraplonk-proof
+yarn submit-proof-to-zkverify
+```

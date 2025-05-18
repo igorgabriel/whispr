@@ -5,14 +5,15 @@ use std::hash::poseidon;
 // descHash: Field with Keccak256(description)
 // proof_nodes: array de siblings do Merkle path
 // proof_indices: array de indices (0 esquerda, 1 direita)
-// root: Merkle root publico
 fn main(
     badgeId: Field,
     descHash: Field,
     proof_nodes: [Field; 4],
     proof_indices: [u8; 4],
-    root: Field
 ) {
+    // root hardcoded
+    let root: Field = 7431307243485218672597359909053805874708073693282662211616124471416675932364;
+
     // 1) Calcula o leaf via Poseidon(BN254)
     let mut node = poseidon::bn254::hash_2([badgeId, descHash]);
 
@@ -44,10 +45,9 @@ fn test_valid_membership_for_badge_3() {
         18837879509182806888829077402235962425120718943028752135635254464375331023545
     ];
     let proof_indices: [u8; 4] = [0, 1, 0, 0];
-    let root: Field = 7431307243485218672597359909053805874708073693282662211616124471416675932364;
 
     // chama o circuito como se fosse a main
-    main(badgeId, descHash, proof_nodes, proof_indices, root);
+    main(badgeId, descHash, proof_nodes, proof_indices);
 }
 
 #[test(should_fail)]
@@ -62,8 +62,7 @@ fn test_valid_membership_for_badge_3_fail() {
         18837879509182806888829077402235962425120718943028752135635254464375331023545
     ];
     let proof_indices: [u8; 4] = [0, 1, 0, 0];
-    let root: Field = 7431307243485218672597359909053805874708073693282662211616124471416675932364;
 
     // chama o circuito como se fosse a main
-    main(badgeId, descHash, proof_nodes, proof_indices, root);
+    main(badgeId, descHash, proof_nodes, proof_indices);
 }
