@@ -16,10 +16,10 @@ async function main() {
   console.log("Session setup complete... ✅");
 
   // Ler proof.bin e public.json
-  const proofPath = path.resolve(__dirname, "../../circuits/target/proof.bin");
+  const proofPath = path.resolve(__dirname, "../../circuits/badges/target/proof.bin");
   const publicJsonPath = path.resolve(
     __dirname,
-    "../../circuits/target/public.json"
+    "../../circuits/badges/target/public.json"
   );
 
   const proof = fs.readFileSync(proofPath);
@@ -29,7 +29,7 @@ async function main() {
 
   const vkHex = fs
     .readFileSync(
-      path.resolve(__dirname, "../../circuits/target/vk.hex"),
+      path.resolve(__dirname, "../../circuits/badges/target/vk.hex"),
       "utf8"
     )
     .trim();

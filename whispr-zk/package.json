@@ -9,8 +9,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "build-merkle": "ts-node src/zk/build-badges-markle-tree.ts",
-    "gen-ultraplonk-proof": "ts-node src/zk/generate-ultraplonk-proof.ts",
-    "submit-proof-to-zkverify": "ts-node src/zk/submit-proof-to-zkverify.ts"
+    "gen-ultraplonk-proof": "ts-node src/zk/generate-ultraplonk-badges-proof.ts",
+    "submit-proof-to-zkverify": "ts-node src/zk/submit-badges-proof-to-zkverify.ts"
   },
   "dependencies": {
     "@aztec/bb.js": "^0.86.0",

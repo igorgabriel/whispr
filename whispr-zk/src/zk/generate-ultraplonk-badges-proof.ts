@@ -7,7 +7,7 @@ async function main() {
   // 1) Carrega o circuito (ACIR + bytecode)
   const circuitPath = path.resolve(
     __dirname,
-    "../../circuits/target/circuits.json"
+    "../../circuits/badges/target/circuits.json"
   );
   const circuit = JSON.parse(fs.readFileSync(circuitPath, "utf8"));
 
@@ -49,7 +49,7 @@ async function main() {
   };
 
   // 5) Salve os artefatos
-  const outDir = path.resolve(__dirname, "../../circuits/target");
+  const outDir = path.resolve(__dirname, "../../circuits/bagdes/target");
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "proof.bin"), proof);
   fs.writeFileSync(

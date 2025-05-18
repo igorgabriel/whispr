@@ -1,0 +1,6 @@
+[package]
+name = "moderation_prompt"
+type = "bin"
+authors = [""]
+
+[dependencies]

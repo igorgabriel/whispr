@@ -22,13 +22,6 @@ interface ErrorResponse {
 
 const ROOT = BigInt(process.env.ROOT || '123');
 
-app.get("/hello", async (req, res) => {
-  const response = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
-  res.json({ message: "Hello World", externalData: response.data });
-});
-
 // Polkadot API singleton
 let api: ApiPromise;
 async function getApi(): Promise<ApiPromise> {

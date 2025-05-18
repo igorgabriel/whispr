@@ -98,7 +98,7 @@ whispr-zk/
 
 
 ## Comandos para o circuito em noir
-Executar os seguintes comandos dentro da pasta **circuits/**:
+Executar os seguintes comandos dentro da pasta **circuits/< badges e ia_answer >**:
 ```
 nargo compile
 nargo test
