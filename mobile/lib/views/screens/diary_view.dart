@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'how_do_you_feel_view.dart';
 import 'shared/bottom_navigation_widget.dart';
 
 class DiaryView extends StatefulWidget {
@@ -37,6 +38,18 @@ class DiaryViewState extends State<DiaryView> {
         PageRouteBuilder(
           transitionDuration: const Duration(seconds: 2),
           pageBuilder: (_, __, ___) => const DiaryView(),
+        ),
+      );
+    }
+  }
+
+  Future<void> gotoHowDoYouFeel() async {
+    if (mounted) {
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 2),
+          pageBuilder: (_, __, ___) => const HowDoYouFeelView(),
         ),
       );
     }
@@ -82,7 +95,7 @@ class DiaryViewState extends State<DiaryView> {
               borderRadius: BorderRadius.circular(100),
             ),
             onPressed: () {
-              // Action to add a new entry
+              gotoHowDoYouFeel();
             },
             child: Image.asset('assets/images/message-plus-circle.png'),
           ),
