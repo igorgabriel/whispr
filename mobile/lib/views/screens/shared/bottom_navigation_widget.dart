@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../whispy_view.dart';
+
 class BottomNavigationWidget extends StatefulWidget {
   const BottomNavigationWidget({super.key});
 
@@ -20,6 +22,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       backgroundColor: Color(0xff1E2A38),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
+
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Desabafos"),
         BottomNavigationBarItem(icon: Icon(Icons.book), label: "Diário"),
@@ -28,7 +31,12 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
           label: "Emoções",
         ),
         BottomNavigationBarItem(
-          icon: Image.asset('assets/images/whispy_icon.png', width: 25),
+          icon: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, WhispyView.route);
+            },
+            child: Image.asset('assets/images/whispy_icon.png', width: 25),
+          ),
           label: "Whispy",
         ),
       ],

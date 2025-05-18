@@ -6,6 +6,7 @@ import '../views/screens/how_do_you_feel_view.dart';
 import '../views/screens/ai_answer_view.dart';
 import '../views/screens/login_view.dart';
 import '../views/screens/splashscreen_view.dart';
+import '../views/screens/whispy_view.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -40,6 +41,11 @@ class AppRouter {
         return MaterialPageRoute(
           settings: const RouteSettings(name: DiaryView.route),
           builder: (_) => const DiaryView(),
+        );
+      case WhispyView.route:
+        return MaterialPageRoute(
+          settings: const RouteSettings(name: WhispyView.route),
+          builder: (_) => const WhispyView(),
         );
       default:
         return MaterialPageRoute(
