@@ -18,6 +18,7 @@ class WhispyView extends StatefulWidget {
 
 class WhispyViewState extends State<WhispyView> {
   List<Map<String, Object?>> whispyBadges = [];
+  List<Map<String, Object?>> showBadges = [];
 
   Future<void> nextScreen() async {
     if (mounted) {
@@ -46,7 +47,25 @@ class WhispyViewState extends State<WhispyView> {
   Future<void> getBadges() async {
     final dbPath = await getDatabasesPath();
     final db = await openDatabase(join(dbPath, 'whispr-db.db'));
+
     whispyBadges = await db.query('badges');
+    var numberDesabafos = (await db.query('desabafos')).length;
+
+    if (numberDesabafos >= 1) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 1).first);
+    }
+
+    if (numberDesabafos >= 5) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 4).first);
+    }
+
+    if (numberDesabafos >= 10) {
+      showBadges.add(whispyBadges.where((element) => element["id"] == 5).first);
+    }
+
+    setState(() {});
+
+    db.close();
   }
 
   @override
@@ -145,7 +164,7 @@ class WhispyViewState extends State<WhispyView> {
                                 height: 110,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: whispyBadges.length,
+                                  itemCount: showBadges.length,
                                   itemBuilder: (item, index) {
                                     return SizedBox(
                                       width: 150,
@@ -173,7 +192,7 @@ class WhispyViewState extends State<WhispyView> {
                                                   SizedBox(width: 10),
                                                   Expanded(
                                                     child: Text(
-                                                      whispyBadges[index]["name"]!
+                                                      showBadges[index]["name"]!
                                                           .toString(),
                                                       textAlign: TextAlign.left,
                                                       style:
@@ -189,7 +208,7 @@ class WhispyViewState extends State<WhispyView> {
                                               ),
                                               SizedBox(height: 10),
                                               Text(
-                                                whispyBadges[index]["description"]!
+                                                showBadges[index]["description"]!
                                                     .toString(),
                                                 textAlign: TextAlign.left,
                                                 maxLines: 2,
