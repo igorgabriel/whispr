@@ -22,3 +22,26 @@ O MVP inclui:
 - Tela de conquistas com provas ZK (sem revelar qual badge foi obtida)
 
 ---
+
+## Estrutura do projeto
+```
+whispr/
+├── whispr-api/             # Backend FastAPI com rotas e serviços
+├── mobile/          # App Flutter (input, resposta, badges)
+├── whispr-zk/              # Serviço REST Node.js com zkVerify
+├── shared/          # Enums (Emotion), constantes, utils
+└── project-board/   # Documentos: escopo, arquitetura, prompts
+```
+
+### Rodar o projeto
+
+Na raiz do projeto, execute o seguinte comando:
+```
+docker compose up
+```
+
+### App mobile
+```
+cd mobile
+flutter run
+```
