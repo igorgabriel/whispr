@@ -254,7 +254,7 @@ class WhispyViewState extends State<WhispyView> {
                                 ],
                               ),
                               Text(
-                                'Aqui no Whispy, você é único, mesmo permanecendo completamente anônimo.\nUtilizamos a tecnologia XxVerifiy para garantir, de forma segura e privada, que cada pessoa que usa o app é real e única sem precisar criar conta, sem rastreamento, sem exposição. Essa prova de identidade protege o espaço emocional de todos, evitando spam e duplicidade, enquanto respeita totalmente sua privacidade.',
+                                'Aqui no Whispy, você é único, mesmo permanecendo completamente anônimo.\nUtilizamos a tecnologia zkVerifiy para garantir, de forma segura e privada, que cada pessoa que usa o app é real e única sem precisar criar conta, sem rastreamento, sem exposição. Essa prova de identidade protege o espaço emocional de todos, evitando spam e duplicidade, enquanto respeita totalmente sua privacidade.',
                                 textAlign: TextAlign.left,
                                 style: GoogleFonts.quicksand(
                                   fontSize: 14,
