@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.routes import auth, confession, zk, diary
 
-app = FastAPI(title="Whispr API")
+app = FastAPI()
 
 # Include routes
 app.include_router(confession.router, prefix="/confessions")

@@ -48,9 +48,8 @@ async function isProofVerified(statementHash: string): Promise<boolean> {
 }
 
 // Rota para validar badge
-app.post(
-  "/validateBadge",
-  async (req: Request,res: Response) => {
+// @ts-ignore
+app.post("/validateBadge", async (req: Request,res: Response) => {
     const { statementHash } = req.body;
     if (typeof statementHash !== "string") {
       return res
@@ -67,6 +66,7 @@ app.post(
   }
 );
 
+// @ts-ignore
 app.post('/validateBadgeLocal', async (req: Request, res: Response) => {
   const { badgeId, descHash, proof_nodes, proof_indices } = req.body as {
     badgeId: number;
