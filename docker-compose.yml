@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./whispr-api
+    container_name: whispr_api
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./whispr-api:/app
+    depends_on:
+      - zk
+
+  zk:
+    build:
+      context: ./whispr-zk
+    container_name: whispr_zk
+    ports:
+      - "8080:8080"
+    environment:
+      - ENV=development
+    volumes:
+      - ./whispr-zk:/app

@@ -50,14 +50,7 @@ async function isProofVerified(statementHash: string): Promise<boolean> {
 // Rota para validar badge
 app.post(
   "/validateBadge",
-  async (
-    req: Request<
-      {},
-      ValidateBadgeResponse | ErrorResponse,
-      ValidateBadgeRequest
-    >,
-    res: Response<ValidateBadgeResponse | ErrorResponse>
-  ) => {
+  async (req: Request,res: Response) => {
     const { statementHash } = req.body;
     if (typeof statementHash !== "string") {
       return res

@@ -1,25 +1,30 @@
 use std::hash::poseidon;
 
-// Emoções permitidas
-const SADNESS: Field = Field::from(0);
-const ANXIETY: Field = Field::from(1);
-const ANGER:    Field = Field::from(2);
+global SADNESS: Field = Field::from(0);
+global ANXIETY: Field = Field::from(1);
+global ANGER: Field = Field::from(2);
+global PROMPT_LEN: u32 = 64;
 
-fn main(
-    prompt_hash_input: Field,      // hash do prompt já calculado off-chain
-    emotion:           Field,      // 0, 1 ou 2
-    risk_flag:         Field,      // deve ser 1
-    public prompt_hash: Field      // o hash de referência já aprovado
-) {
-    // 1) Verifica que o cliente usou exatamente o prompt aprovado
-    assert(prompt_hash_input == prompt_hash);
+fn main(prompt_hash_input: [Field; PROMPT_LEN], emotion: Field, risk_flag: Field) {
+    let prompt_hash: Field =
+        10235324557001578325432759324202516551848898181889185265008640117344586426929;
 
-    // 2) Estamos em modo crítico
-    assert(risk_flag == Field::one());
+    // 1) Recalcula o hash do prompt usando poseidon hash_2 iterativo
+    let mut state: Field = Field::from(0);
+    for i in 0..PROMPT_LEN {
+        state = poseidon::bn254::hash_2([state, prompt_hash_input[i]]);
+    }
 
-    // 3) Emoção permitida
-    let is_sad  = emotion == SADNESS;
-    let is_anx  = emotion == ANXIETY;
-    let is_calm = emotion == CALM;
-    assert(is_sad || is_anx || is_calm);
+    // 2) Verifica que bate com o hash publico
+    assert(state == prompt_hash);
+
+    // 3) Estamos em modo critico
+    assert(risk_flag == Field::from(1));
+
+    // Calcula (emotion - SADNESS)*(emotion - ANXIETY)*(emotion - CALM) == 0
+    let diff1 = emotion - SADNESS;
+    let diff2 = emotion - ANXIETY;
+    let diff3 = emotion - ANGER;
+    let prod = diff1 * diff2 * diff3;
+    assert(prod == Field::from(0));
 }
