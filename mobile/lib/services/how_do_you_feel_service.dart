@@ -7,10 +7,14 @@ import '../data/app_exception.dart';
 import '../data/remote/network/network_service.dart';
 import '../data/remote/network/network_values.dart';
 import '../di/injector.dart';
+import '../models/badge.dart';
 import '../models/replyAI.dart';
 
 class HowDoYouFeelService {
-  Future<Either<AppException, Response>> post(String text) async {
+  Future<Either<AppException, Response>> post(
+    String text,
+    List<Badge> badges,
+  ) async {
     final NetworkService networkService = injector.get<NetworkService>();
 
     final response = await networkService.post(
@@ -52,6 +56,11 @@ class HowDoYouFeelService {
           'INSERT INTO desabafos(timestamp, text, ia_answer) VALUES("${DateTime.now().toIso8601String()}", "$text", "$jsonData")',
         );
         db.close();
+
+        final response = await networkService.post(
+          EndPoints.verify,
+          data: {'badges': badges.map((b) => b.toJson()).toList()},
+        );
       });
 
       final response = ReplyAI.fromJson(jsonData);
