@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 Future<void> initDb() async {
   Future<void> createDb(Database db) async {
+    await db.execute('DROP TABLE badges');
     await db.execute(
       'CREATE TABLE IF NOT EXISTS badges(id INTEGER PRIMARY KEY, name TEXT, description TEXT, descHash TEXT, siblings TEXT, pathIndices TEXT)',
     );
@@ -25,7 +26,7 @@ Future<void> initDb() async {
     onOpen: (db) async {
       return await createDb(db);
     },
-    version: 1,
+    version: 2,
   );
 
   await db.rawInsert(
